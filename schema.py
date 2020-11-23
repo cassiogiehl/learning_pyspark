@@ -18,13 +18,5 @@ class Schema:
     def get_schema_standarization()-> StructType:
         return StructType([
             StructField('label', FloatType(), True),
-            StructField('features', StructType([
-                StructField('totalBedrooms', FloatType(), True),
-                StructField('population', FloatType(), True),
-                StructField('households', FloatType(), True),
-                StructField('medianIncome', DoubleType(), True),
-                StructField('roomsPerHousehold', DoubleType(), True),
-                StructField('populationPerHousehold', DoubleType(), True),
-                StructField('bedroomsPerRoom', DoubleType(), True),
-            ]))
+            StructField('features', FloatType(), True)
         ])

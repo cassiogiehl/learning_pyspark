@@ -30,4 +30,7 @@ class Transformations:
                 "bedroomsPerRoom")
                 
     def standarization(self, df: DataFrame) -> DataFrame:
-        return self._spark.createDataFrame(df.rdd, Schema.get_schema_standarization())
+        input_data = df.rdd.map(lambda x: (x[0], DenseVector(x[1:])))
+        df = self._spark.createDataFrame(input_data, ['label', 'features'])
+        # df = input_data.toDF("label", "features")
+        return df

@@ -1,6 +1,7 @@
 from pyspark.sql import SparkSession
 from transformations import Transformations
 from file import File
+from model import Model
 
 spark = SparkSession.builder \
                     .master('local') \
@@ -19,5 +20,8 @@ df = df.transform(transformation.normalize_medianHouseValue) \
         .transform(transformation.reorder_columns) \
         .transform(transformation.standarization)
 
-df.show()
+model = Model(spark, df).fit_transform()
 
+train_data, test_data = model.train_test_split()
+
+model.Regression(train_data)
